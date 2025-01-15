@@ -1,7 +1,12 @@
 // @ts-check
 'use strict'
 
-const server = require('./lib/server');
+const {server, fastify} = require('./lib/server');
+const {
+    OK, 
+    BAD_REQUEST,
+    INTERNAL_SERVER_ERROR 
+} = require('./lib/handler');
 
 /**
  * @returns {void}
@@ -12,9 +17,18 @@ function init() {
 
 const mazu = {
     init,
+    log: fastify.log,
     get: server.get,
     post: server.post,
-    serve: server.serve
 };
 
-module.exports = mazu;
+const log = fastify.log;
+
+module.exports = {
+    mazu,
+    log,
+    fastify,
+    OK,
+    BAD_REQUEST,
+    INTERNAL_SERVER_ERROR
+};
