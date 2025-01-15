@@ -5,7 +5,7 @@ const {log, OK} = require('../../index');
 
 /**
  * 
- * @param {{isBase64Encoded: boolean, body: string}} event 
+ * @param {{pathParameters: any, queryStringParameters: any}} event 
  * @param {any} context
  * @returns {Promise<{
  *  statusCode: number, 
@@ -14,8 +14,6 @@ const {log, OK} = require('../../index');
  * }>} 
  */
 async function handler(event, context) {
-    log.info(event.body);
-    
     return {
         statusCode: OK,
         headers: {},
