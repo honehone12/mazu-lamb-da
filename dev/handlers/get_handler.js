@@ -1,7 +1,7 @@
 // @ts-check
 'use strict'
 
-const {log, OK} = require('../../index');
+import {log, OK} from '../../index.js';
 
 /**
  * 
@@ -13,12 +13,10 @@ const {log, OK} = require('../../index');
  *  body: string
  * }>} 
  */
-async function handler(event, context) {
+export async function handler(event, context) {
     return {
         statusCode: OK,
         headers: {},
         body: "ok"
     };
 }
-
-module.exports.handler = handler;

@@ -1,8 +1,8 @@
 // @ts-check
 'use strict'
 
-const {mazu, fastify, log} = require('../index');
-const {handler: getHandler} = require('./handlers/get_handler');
+import {mazu, fastify, log} from '../index.js';
+import {handler as getHandler} from './handlers/get_handler.js';
 
 mazu.init();
 mazu.get('/', getHandler);
