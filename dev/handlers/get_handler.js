@@ -15,11 +15,11 @@ import {log, OK} from '../../index.js';
  */
 export async function handler(event, context) {
     if (event.pathParameters) {
-        log.info(event.pathParameters);
+        log.info("path: %o", event.pathParameters);
     }
 
     if (event.queryStringParameters) {
-        log.info(event.queryStringParameters);
+        log.info("query: %o", event.queryStringParameters);
     }
 
     return {
