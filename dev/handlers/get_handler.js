@@ -14,9 +14,19 @@ import {log, OK} from '../../index.js';
  * }>} 
  */
 export async function handler(event, context) {
+    if (event.pathParameters) {
+        log.info(event.pathParameters);
+    }
+
+    if (event.queryStringParameters) {
+        log.info(event.queryStringParameters);
+    }
+
     return {
         statusCode: OK,
-        headers: {},
-        body: "ok"
+        headers: {
+            'Content-Type': 'text/plain' 
+        },
+        body: 'ok'
     };
 }

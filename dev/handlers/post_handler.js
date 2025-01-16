@@ -1,7 +1,7 @@
 // @ts-check
 'use strict'
 
-import { OK } from "../../index.js";
+import { log, OK } from "../../index.js";
 
 /**
  * @param {{isBase64Encoded: boolean, body: string}} event 
@@ -13,9 +13,16 @@ import { OK } from "../../index.js";
  * }>} 
  */
 export async function handler(event, context) {
+    if (event.body) {
+        log.info(event.body);
+        log.info(event.isBase64Encoded);
+    }
+
     return {
         statusCode: OK,
-        headers: {},
-        body: "ok"
+        headers: {
+            'Content-Type': 'text/plain' 
+        },
+        body: 'ok'
     };
 }

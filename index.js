@@ -8,6 +8,7 @@ export * from './lib/handler.js';
  * @returns {void}
  */
 function init() {
+    server.initErrorHandler();
     server.initContentTypeParsers();
 }
 
