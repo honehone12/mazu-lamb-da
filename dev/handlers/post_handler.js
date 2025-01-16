@@ -1,11 +1,15 @@
 // @ts-check
 'use strict'
 
-import { log, OK, badRequest } from "../../index.js";
+import { log, OK, badRequest, TEXT, FORM } from "../../index.js";
 import querystring from "node:querystring";
 
 /**
- * @param {{isBase64Encoded: boolean, body: string}} event 
+ * @param {{
+ *  headers: any,
+ *  isBase64Encoded: boolean, 
+ *  body: string
+ * }} event 
  * @param {any} context,
  * @returns {Promise<{
  *  statusCode: number, 
@@ -14,22 +18,25 @@ import querystring from "node:querystring";
  * }>} 
  */
 export async function handler(event, context) {
-    if (!event.body) {
+    if (!event.body || !event.headers) {
         return badRequest();
     }
 
+    if (event.headers['content-type'] !== FORM) {
+        return badRequest();
+    }
+
+    let form = {};
     try {
-        log.info('raw: %s', event.body);
         let body = event.body;
         if (event.isBase64Encoded) {
             const b64Dec = Buffer.from(event.body, 'base64')
                 .toString('utf-8');
-            log.info("b64 decoded: %s", b64Dec);
             body = b64Dec;
         }
 
-        const query = querystring.parse(body);
-        log.info('query: %o', query);    
+        form = querystring.parse(body);
+        log.info('form: %o', form);    
     } catch (error) {
         return badRequest();
     }
@@ -37,7 +44,7 @@ export async function handler(event, context) {
     return {
         statusCode: OK,
         headers: {
-            'Content-Type': 'text/plain' 
+            'Content-Type': TEXT 
         },
         body: 'ok'
     };

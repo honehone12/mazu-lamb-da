@@ -1,11 +1,15 @@
 // @ts-check
 'use strict'
 
-import {log, OK} from '../../index.js';
+import {log, OK, TEXT} from '../../index.js';
 
 /**
  * 
- * @param {{pathParameters: any, queryStringParameters: any}} event 
+ * @param {{
+ *  headers: any,
+ *  pathParameters: any, 
+ *  queryStringParameters: any
+ * }} event 
  * @param {any} context
  * @returns {Promise<{
  *  statusCode: number, 
@@ -25,7 +29,7 @@ export async function handler(event, context) {
     return {
         statusCode: OK,
         headers: {
-            'Content-Type': 'text/plain' 
+            'Content-Type': TEXT 
         },
         body: 'ok'
     };
